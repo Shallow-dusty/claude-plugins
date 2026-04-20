@@ -1,0 +1,11 @@
+{
+  "name": "scriptorium",
+  "version": "0.1.0",
+  "description": "Academic research toolkit: paper search, Zotero, LaTeX thesis, experiment tables, and HTML slides.",
+  "author": {
+    "name": "Shallow",
+    "url": "https://github.com/shallowdusty"
+  },
+  "license": "MIT",
+  "keywords": ["academic", "research", "latex", "thesis", "paper-search", "zotero"]
+}

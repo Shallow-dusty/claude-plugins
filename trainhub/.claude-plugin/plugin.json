@@ -1,0 +1,11 @@
+{
+  "name": "trainhub",
+  "version": "0.1.0",
+  "description": "Multi-platform ML training workflow: dispatch, monitor, harvest across Kaggle / Colab / SSH / cloud GPU.",
+  "author": {
+    "name": "Shallow",
+    "url": "https://github.com/shallowdusty"
+  },
+  "license": "MIT",
+  "keywords": ["ml", "training", "kaggle", "colab", "ssh", "workflow"]
+}

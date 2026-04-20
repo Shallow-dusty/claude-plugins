@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "paper-search": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--with", "paper-search-mcp", "python", "-m", "paper_search_mcp.server"]
+    },
+    "zotero": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["zotero-mcp", "--transport", "stdio"],
+      "env": {
+        "ZOTERO_LOCAL": "true"
+      }
+    }
+  }
+}

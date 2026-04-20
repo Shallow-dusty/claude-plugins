@@ -1,0 +1,8 @@
+# Plugin runtime artifacts
+*/node_modules/
+*/venv/
+*/.venv/
+*/__pycache__/
+*/dist/
+*.log
+.DS_Store

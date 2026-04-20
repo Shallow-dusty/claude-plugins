@@ -1,0 +1,20 @@
+{
+  "name": "shallow-local",
+  "owner": {
+    "name": "Shallow"
+  },
+  "plugins": [
+    {
+      "name": "scriptorium",
+      "description": "Academic research toolkit: paper search, Zotero, LaTeX thesis, experiment tables, HTML slides.",
+      "category": "academic",
+      "source": "./scriptorium"
+    },
+    {
+      "name": "trainhub",
+      "description": "Multi-platform ML training workflow: dispatch, monitor, harvest across Kaggle / Colab / SSH.",
+      "category": "ml",
+      "source": "./trainhub"
+    }
+  ]
+}
