@@ -8,6 +8,7 @@ Personal marketplace for Claude Code plugins developed by [@Shallow-dusty](https
 |---|---|
 | **[scriptorium](./scriptorium/)** | Academic research toolkit — paper search (arXiv/bioRxiv/medRxiv/PubMed/Google Scholar), Zotero integration, LaTeX thesis build/wordcount/cross-ref check, LaTeX experiment tables, animation-rich HTML presentations. |
 | **[trainhub](./trainhub/)** | Multi-platform ML training workflow — dispatch / monitor / harvest training jobs across Kaggle kernels, Google Colab, SSH remote GPU hosts. Project defaults persisted in `.trainhub.json`. |
+| **[atelier](./atelier/)** | Personal `/command` skills — API pool switching, academic translation, term glossary, academic consistency audit, Claude Code release digest. |
 
 ## Installation
 
@@ -18,6 +19,7 @@ claude plugin marketplace add https://github.com/Shallow-dusty/claude-plugins
 # Install plugins
 claude plugin install scriptorium@shallow-local
 claude plugin install trainhub@shallow-local
+claude plugin install atelier@shallow-local
 ```
 
 Or locally (for development):
