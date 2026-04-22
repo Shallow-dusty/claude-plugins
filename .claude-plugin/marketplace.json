@@ -15,6 +15,12 @@
       "description": "Multi-platform ML training workflow: dispatch, monitor, harvest across Kaggle / Colab / SSH.",
       "category": "ml",
       "source": "./trainhub"
+    },
+    {
+      "name": "atelier",
+      "description": "Personal command skills: API switching, academic audit, academic translation, term glossary, release digest.",
+      "category": "utilities",
+      "source": "./atelier"
     }
   ]
 }

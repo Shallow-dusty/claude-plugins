@@ -1,0 +1,12 @@
+# 快速检查 Profile
+name: minimal
+description: 仅运行自动扫描，不启动 AI 审核
+
+phase1:
+  enabled: [data, latex]
+
+phase2:
+  enabled: []
+
+archive: false
+diff_previous: false

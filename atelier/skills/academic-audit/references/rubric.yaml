@@ -1,0 +1,182 @@
+# Academic Audit Rubric — 量化评分量表
+# 每个维度定义 0/4/7/10 四个锚点，消除主观性
+# 用于 Phase 1 自动扫描结果的评分
+
+dimensions:
+
+  data_integrity:
+    name: 数据集完整性
+    weight: 1.0
+    anchors:
+      10: "零缺失：train/val/test 文件数与声称完全一致，零孤立文件，配置文件正确"
+      7:  "基本完整：文件数匹配，<5 个标注文件缺失或格式异常"
+      4:  "有缺陷：>5 个文件缺失/不匹配，或配置文件有错误"
+      0:  "严重问题：数据集不完整或目录结构损坏"
+    auto_checks:
+      - id: file_count_match
+        description: "train/val/test 图片数与 data.yaml 声称一致"
+        type: exact_match
+      - id: label_image_pair
+        description: "每张图片都有对应标签文件"
+        type: pair_check
+      - id: config_valid
+        description: "data.yaml nc/names/path 配置正确"
+        type: yaml_validate
+
+  result_consistency:
+    name: 实验结果一致性
+    weight: 1.0
+    anchors:
+      10: "所有声称数值可从原始文件追溯，跨平台 delta < 3pp"
+      7:  "多数数值匹配，<3 处偏差在合理范围内"
+      4:  "多处数值不匹配或无法追溯"
+      0:  "结果不可信或关键数据缺失"
+    auto_checks:
+      - id: csv_completeness
+        description: "每个实验的 results.csv 行数 = epochs + 1"
+        type: row_count
+      - id: doc_data_match
+        description: "文档声称的 mAP 值与 CSV 最佳 epoch 匹配"
+        type: value_match
+
+  latex_format:
+    name: LaTeX 格式与引用
+    weight: 0.8
+    anchors:
+      10: "零编译错误，零悬空引用，bib 条目完整率 100%"
+      7:  "零错误，<3 个警告，bib 完整率 >90%"
+      4:  "有编译错误或 >5 个悬空引用"
+      0:  "无法编译或引用系统严重损坏"
+    auto_checks:
+      - id: compile_errors
+        description: "main.log 中 error 数量"
+        type: count_zero
+      - id: cite_bib_match
+        description: "正文 \\cite{key} 全部在 .bib 中有对应条目"
+        type: set_diff
+      - id: orphan_bib
+        description: ".bib 中有但正文未引用的条目"
+        type: set_diff
+      - id: dangling_ref
+        description: "\\ref{label} 指向不存在的 \\label"
+        type: set_diff
+      - id: overfull_count
+        description: "Overfull hbox 警告数量"
+        type: count
+
+  code_quality:
+    name: 代码质量
+    weight: 0.8
+    anchors:
+      10: "ruff 零违规，cyclomatic complexity 全部 < 10，零重复代码块"
+      7:  "ruff < 10 违规，complexity < 15，重复 < 3 处"
+      4:  "ruff > 30 违规或 complexity > 20"
+      0:  "代码无法运行或严重质量问题"
+    auto_checks:
+      - id: ruff_violations
+        description: "ruff check 违规数"
+        type: count
+      - id: cyclomatic_complexity
+        description: "radon cc 平均复杂度"
+        type: threshold
+        threshold: 10
+      - id: duplicate_blocks
+        description: ">10 行的重复代码块数"
+        type: count
+
+  git_health:
+    name: Git 实践
+    weight: 0.6
+    anchors:
+      10: ".gitignore 全面，零大文件(>10MB)泄漏，commit 规范率>90%"
+      7:  ".gitignore 基本覆盖，<2 个大文件，commit 规范率>70%"
+      4:  "大文件泄漏 >50MB 或 commit 规范率 <50%"
+      0:  "凭据泄漏或 .git 损坏"
+    auto_checks:
+      - id: large_files
+        description: "git 历史中 >10MB 的文件"
+        type: list
+      - id: tracked_secrets
+        description: ".env / credentials / token 等文件被跟踪"
+        type: pattern_search
+      - id: commit_conventional
+        description: "conventional commits 格式占比"
+        type: percentage
+
+  dependency_management:
+    name: 依赖管理
+    weight: 0.6
+    anchors:
+      10: "全量版本锁定，零已知漏洞，requirements 和 pyproject 一致"
+      7:  "核心依赖锁定，<2 个低风险漏洞"
+      4:  "多数依赖未锁定或有高风险漏洞"
+      0:  "无依赖声明文件"
+    auto_checks:
+      - id: pinned_ratio
+        description: "精确版本锁定 (==) 的依赖比例"
+        type: percentage
+      - id: known_vulns
+        description: "pip-audit 已知漏洞数"
+        type: count
+
+  reproducibility:
+    name: 可复现性
+    weight: 0.8
+    anchors:
+      10: "随机种子固定+声明，Docker 可构建，一键复现脚本"
+      7:  "种子固定，Docker 存在但可能需调整"
+      4:  "部分种子缺失或无 Docker"
+      0:  "无种子控制，无法复现"
+    auto_checks:
+      - id: seed_set
+        description: "训练脚本中是否设置 seed 和 deterministic"
+        type: pattern_search
+      - id: dockerfile_exists
+        description: "Dockerfile 是否存在"
+        type: file_exists
+      - id: docker_builds
+        description: "Docker 能否成功构建（可选，耗时）"
+        type: optional_build
+
+  aigc_risk:
+    name: AIGC 风格风险
+    weight: 0.8
+    anchors:
+      10: "几乎无 AI 写作特征，个人风格明显"
+      7:  "<20% 段落有 AI 特征，整体有个人分析"
+      4:  "40-60% 段落有明显 AI 特征"
+      0:  ">80% 高度模式化，几乎无个人观点"
+    auto_checks:
+      - id: ai_phrase_density
+        description: "AI 高频句式占段落总数的比例"
+        type: percentage
+      - id: paragraph_symmetry
+        description: "连续段落结构对称性评分"
+        type: score
+      - id: transition_word_density
+        description: "过渡词(此外/同时/另外)密度"
+        type: density
+
+  project_engineering:
+    name: 项目工程化
+    weight: 0.6
+    anchors:
+      10: "LICENSE + CI + 完整文档 + 自动化测试 + semver"
+      7:  "LICENSE + README 完整，缺少 CI 或测试"
+      4:  "缺少 LICENSE 或 README 不完整"
+      0:  "无文档，目录混乱"
+    auto_checks:
+      - id: license_exists
+        description: "LICENSE 文件是否存在"
+        type: file_exists
+      - id: readme_quality
+        description: "README 字数和必要章节覆盖"
+        type: section_check
+      - id: ci_exists
+        description: "GitHub Actions 或其他 CI 配置"
+        type: file_exists
+        paths: [".github/workflows/", ".gitlab-ci.yml", "Jenkinsfile"]
+
+# 综合评分公式:
+# weighted_sum = Σ(dimension_score × weight) / Σ(weight)
+# grade: A(9-10), B+(8-8.9), B(7-7.9), C+(6-6.9), C(5-5.9), D(<5)

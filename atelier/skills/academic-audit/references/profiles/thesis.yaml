@@ -1,0 +1,20 @@
+# 毕设全面审核 Profile
+name: thesis
+description: 本科/硕士毕业设计全面审核
+
+phase1:
+  enabled: [data, latex, git, code]
+
+phase2:
+  enabled:
+    - paper-structure   # 论文结构与学术逻辑
+    - paper-quality     # AIGC 风格 + 查重风险
+    - code-reviewer     # 代码质量与架构
+    - project-arch      # 工程化与最佳实践
+  optional:
+    - paper-format      # LaTeX 深度格式检查（Phase 1 已覆盖基础）
+    - reproducibility   # 可复现性深度检查
+    - data-audit        # 数据深度审核（Phase 1 已覆盖基础）
+
+archive: true
+diff_previous: true

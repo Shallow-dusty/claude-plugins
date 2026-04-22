@@ -1,0 +1,21 @@
+# 期刊投稿前审核 Profile
+name: journal
+description: 期刊投稿前专项检查，重点关注 AIGC 和可复现性
+
+phase1:
+  enabled: [data, latex, git]
+
+phase2:
+  enabled:
+    - paper-quality     # AIGC 检测加深模式
+    - reproducibility   # 跨平台/跨数据集一致性
+  optional:
+    - paper-structure   # 投稿版论文结构
+
+archive: true
+diff_previous: true
+
+extra_checks:
+  aigc_focus: true        # AIGC 检测使用加深模式
+  cross_dataset: true     # 要求验证跨数据集结果
+  citation_freshness: true # 检查引用文献时效性（>3年占比）

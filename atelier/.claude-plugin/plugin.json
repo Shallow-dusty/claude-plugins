@@ -1,0 +1,11 @@
+{
+  "name": "atelier",
+  "version": "0.1.0",
+  "description": "Personal command skills: API switching, academic audit, academic translation, term glossary, Claude Code release digest.",
+  "author": {
+    "name": "Shallow",
+    "url": "https://github.com/shallowdusty"
+  },
+  "license": "MIT",
+  "keywords": ["personal", "utilities", "translation", "academic", "api", "release-notes"]
+}

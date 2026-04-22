@@ -1,0 +1,82 @@
+[
+  {
+    "query": "帮我全面审核一下毕设，论文、代码、数据全都查一遍，看看有什么问题",
+    "should_trigger": true
+  },
+  {
+    "query": "我要投期刊了，先帮我做个投稿前检查，重点看看 AIGC 风险和数据一致性",
+    "should_trigger": true
+  },
+  {
+    "query": "run a quick audit on my thesis project - check if the LaTeX citations match the bib file and if the dataset splits are correct",
+    "should_trigger": true
+  },
+  {
+    "query": "我的论文查重率可能偏高，帮我分析一下哪些段落可能有问题，标注出来我好改",
+    "should_trigger": true
+  },
+  {
+    "query": "对这个项目做个体检吧，git历史有没有大文件泄露，代码有没有重复，依赖版本锁没锁",
+    "should_trigger": true
+  },
+  {
+    "query": "验证一下我的实验数据，results 目录里几个平台跑出来的 mAP 是不是一致的，论文里写的数对不对",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我审计一下代码质量，看看有没有安全问题、架构设计是否合理、monkey-patch 的实现有没有 bug",
+    "should_trigger": true
+  },
+  {
+    "query": "做一下 /academic-audit scan，只跑自动扫描不需要 AI 深度审核",
+    "should_trigger": true
+  },
+  {
+    "query": "i need to check if my paper has any AI-generated content patterns before submitting to the journal, can you scan the tex files",
+    "should_trigger": true
+  },
+  {
+    "query": "这个开源仓库投稿前需要整理一下，帮我检查 LICENSE、CI、README 是否符合最佳实践",
+    "should_trigger": true
+  },
+  {
+    "query": "帮我写一篇关于裂缝检测的论文综述，覆盖最近三年的 YOLO 改进方向",
+    "should_trigger": false
+  },
+  {
+    "query": "把论文第三章的公式重新排版一下，equation 环境换成 align 环境",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我跑一下 E2 实验，用 3070 GPU，epochs 设 100",
+    "should_trigger": false
+  },
+  {
+    "query": "我的 train.py 报错了 ModuleNotFoundError: No module named 'ultralytics'，帮我修一下",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我把这个 results.csv 画成折线图，横轴是 epoch，纵轴是 mAP50",
+    "should_trigger": false
+  },
+  {
+    "query": "review this pull request, check if the code changes look good and there are no regressions",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我优化 app.py 的 Gradio 界面，加一个模型对比 tab",
+    "should_trigger": false
+  },
+  {
+    "query": "搜一下 Semantic Scholar 上关于 wall crack detection 的最新论文，找 2024-2025 年的",
+    "should_trigger": false
+  },
+  {
+    "query": "帮我把论文翻译成英文，准备投国际会议",
+    "should_trigger": false
+  },
+  {
+    "query": "我要给毕设做个答辩 PPT，大概 15 页，包含实验结果和演示截图",
+    "should_trigger": false
+  }
+]
